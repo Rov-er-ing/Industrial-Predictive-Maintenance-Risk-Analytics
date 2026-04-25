@@ -1,0 +1,20 @@
+{
+  "models": {
+    "xgboost": {
+      "f1_score": 0.6072884709943646
+    },
+    "random_forest": {
+      "f1_score": 0.38431254787252195
+    },
+    "mlp": {
+      "f1_score": 0.6466633869000861
+    }
+  },
+  "top_failure_predictors": [
+    "rotate_avg_24h",
+    "volt_avg_24h",
+    "pressure_avg_24h",
+    "vibration_avg_24h",
+    "vibration_avg_3h"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "xgboost": {
+    "params": {
+      "n_estimators": 355,
+      "max_depth": 12,
+      "learning_rate": 0.11159920412770512,
+      "subsample": 0.7848486436241976,
+      "colsample_bytree": 0.6787362161766249,
+      "min_child_weight": 6,
+      "reg_alpha": 3.8146383352198607,
+      "reg_lambda": 5.2455137319606915e-08
+    },
+    "f1": 0.6072884709943646
+  },
+  "random_forest": {
+    "params": {
+      "n_estimators": 309,
+      "max_depth": 19,
+      "min_samples_split": 5,
+      "min_samples_leaf": 4,
+      "max_features": "sqrt"
+    },
+    "f1": 0.38431254787252195
+  },
+  "mlp": {
+    "params": {
+      "n_layers": 4,
+      "n_units_l0": 16,
+      "n_units_l1": 160,
+      "n_units_l2": 182,
+      "n_units_l3": 68,
+      "activation": "relu",
+      "alpha": 2.752053644241489e-05,
+      "lr": 0.001108148286347204
+    },
+    "f1": 0.6466633869000861
+  }
+}

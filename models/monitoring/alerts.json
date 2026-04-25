@@ -1,0 +1,18 @@
+[
+  {
+    "alert_id": "ALT-1776688106",
+    "timestamp": "2026-04-20 17:58:26",
+    "machine_id": "SIM-MACHINE-01",
+    "severity": "CRITICAL",
+    "message": "High risk of failure detected. Estimated TTF: 88.1 hours.",
+    "status": "RESOLVED"
+  },
+  {
+    "alert_id": "ALT-1776688500",
+    "timestamp": "2026-04-20 18:05:00",
+    "machine_id": "SIM-MACHINE-01",
+    "severity": "CRITICAL",
+    "message": "High risk of failure detected. Estimated TTF: 88.1 hours.",
+    "status": "OPEN"
+  }
+]
