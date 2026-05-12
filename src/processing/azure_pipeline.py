@@ -60,7 +60,8 @@ class AzureDataPipeline:
         return labeled_df
 
 if __name__ == "__main__":
-    AZURE_PATH = r"C:\Users\Shiti\.cache\kagglehub\datasets\arnabbiswas1\microsoft-azure-predictive-maintenance\versions\3"
+    from src.config import Config
+    AZURE_PATH = Config.AZURE_PATH
     pipeline = AzureDataPipeline(AZURE_PATH)
     tel, err, maint, fail, mach = pipeline.load_data()
     df = pipeline.engineer_features(tel, err, maint, mach)

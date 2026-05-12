@@ -9,22 +9,23 @@ import sys
 import logging
 from datetime import datetime
 
+from src.config import Config
+
 # Ensure log directory exists
-os.makedirs("models/monitoring", exist_ok=True)
+os.makedirs(Config.MODEL_DIR / "monitoring", exist_ok=True)
 
 # Setup logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler("models/monitoring/api.log"),
+        logging.FileHandler(Config.MODEL_DIR / "monitoring" / "api.log"),
         logging.StreamHandler()
     ]
 )
 logger = logging.getLogger("PredictionAPI")
 
-# Add project root to sys.path to allow imports from src
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
+# Standardized imports from src
 try:
     from src.monitoring.guardian import log_prediction, initialize_monitoring
     initialize_monitoring()
@@ -48,14 +49,14 @@ app.add_middleware(
 MODELS = {}
 PATHS = {
     "skeleton": "models/xgboost_baseline.pkl",
-    "muscle": "models/xgb_optimized.pkl",
-    "ttf": "models/ttf_regressor.pkl"
+    "muscle": Config.XGB_OPTIMIZED,
+    "ttf": Config.TTF_MODEL
 }
 
 for name, path in PATHS.items():
     if os.path.exists(path):
         MODELS[name] = joblib.load(path)
-        print(f"Loaded {name} model from {path}")
+        logger.info(f"Loaded {name} model from {path}")
 
 # --- Data Models ---
 class SkeletonReading(BaseModel):
@@ -162,13 +163,13 @@ def predict_muscle(reading: MuscleReading):
 
         # --- Heuristic Safety Override (Industrial Best Practice) ---
         # If sensors are in a physically dangerous range, override AI for safety.
-        if reading.vibration > 75 or reading.error_count >= 4:
+        if reading.vibration > Config.VIBRATION_CRITICAL_THRESHOLD or reading.error_count >= Config.ERROR_COUNT_CRITICAL:
             res["risk_level"] = "High"
             res["failure_predicted_24h"] = True
             res["failure_probability"] = max(res["failure_probability"], 0.95)
             if res["time_to_failure_hours"] == "Normal Operation":
                 res["time_to_failure_hours"] = 12.0
-        elif reading.vibration > 60 or reading.error_count >= 2:
+        elif reading.vibration > Config.VIBRATION_WARNING_THRESHOLD or reading.error_count >= 2:
             if res["risk_level"] == "Low":
                 res["risk_level"] = "Medium"
                 res["failure_probability"] = max(res["failure_probability"], 0.45)

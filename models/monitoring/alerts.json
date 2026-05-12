@@ -13,6 +13,6 @@
     "machine_id": "SIM-MACHINE-01",
     "severity": "CRITICAL",
     "message": "High risk of failure detected. Estimated TTF: 88.1 hours.",
-    "status": "OPEN"
+    "status": "RESOLVED"
   }
 ]

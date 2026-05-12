@@ -16,7 +16,8 @@ import xgboost as xgb
 import joblib
 import os
 
-AZURE_PATH = r"C:\Users\Shiti\.cache\kagglehub\datasets\arnabbiswas1\microsoft-azure-predictive-maintenance\versions\3"
+from src.config import Config
+AZURE_PATH = Config.AZURE_PATH
 
 def load_and_merge_azure():
     """Load all Azure CSVs and perform temporal joins."""

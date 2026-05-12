@@ -7,6 +7,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
 
+from src.config import Config
+
 # --- Page Config ---
 st.set_page_config(
     page_title="Industrial Health Control Center",
@@ -33,7 +35,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- Helpers ---
-API_URL = "http://localhost:8000"
+API_URL = Config.API_URL
 
 def get_prediction_muscle(data):
     try:
